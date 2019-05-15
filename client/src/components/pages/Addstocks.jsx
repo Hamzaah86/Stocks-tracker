@@ -95,13 +95,13 @@ export default class Addstocks extends Component {
         return (
             <div className="Addstocks">
                 <h2>Add stocks</h2>
-                <table className="table table-dark">
+                <table className="table table-background">
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Open</th>
                             <th scope="col">Closed</th>
-                            <th scope="col">Remove</th>
+                            <th scope="col" >Remove</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,8 +121,8 @@ export default class Addstocks extends Component {
                 </table>
 
                 <form>
-                    Search for stock:{' '}
-                    <input
+                    <span style={{fontSize:'20px'}}> Search for stock:{' '}</span>    
+                    <input className="input-stock"
                         type="text"
                         value={this.state.name}
                         name="name"

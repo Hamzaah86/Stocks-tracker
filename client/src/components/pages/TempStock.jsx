@@ -17,7 +17,7 @@ export default class TempStock extends Component {
                 <td>{this.props.open}</td>
                 <td>{this.props.closed}</td>
                 <td>
-                    <button onClick={()=>this.props.delete(this.props.name)} >Remove</button>
+                    <button onClick={()=>this.props.delete(this.props.name)} className='remove-btn'>Remove</button>
                 </td>
             </tr>
         );

@@ -11,11 +11,14 @@ export default class News extends Component {
     }
     render() {
         return (
-            <div className="News">
-                <h2>News</h2>
-                {this.state.news.map((article, idx) => (
-                    <li key={idx}>{article.title}</li>
+            
+            <div class="ticker-wrap">
+            <div class="ticker">
+                {this.state.news && this.state.news.map((article, idx) => (
+                    <div className="ticker__item">{article.title}</div>
                 ))}
+              
+            </div>
             </div>
         );
     }

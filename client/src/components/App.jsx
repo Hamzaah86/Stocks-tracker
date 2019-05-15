@@ -10,6 +10,7 @@ import Signup from './pages/Signup';
 import api from '../api';
 import StockDetails from './pages/StockDetails';
 import userPortfolio from './pages/userPortfolio';
+import News from './pages/News'
 
 //import logo from '../logo.svg';
 //<img src={logo} className="App-logo" alt="logo" />
@@ -30,7 +31,7 @@ export default class App extends Component {
         return (
             <div className="App">
                 {
-                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                    <nav className="navbar navbar-expand-lg navbar-light bg-light nav-font">
                         <a className="App-title">
                             {' '}
                             <NavLink to="/" exact>
@@ -118,6 +119,7 @@ export default class App extends Component {
 
                     <Route render={() => <h2>404</h2>} />
                 </Switch>
+                <News />
             </div>
         );
     }

@@ -57,12 +57,14 @@ export default class ChartOverview extends Component {
             <div>
                 {Object.entries(this.state.companies).map((arr, i) => {
                     return (
-                        <Chart
+                        <div style={{ width: '50vw', margin:"auto" }}>
+                        <Chart 
                             key={i}
                             name={arr[0]}
                             symbol={arr[0]}
                             values={arr[1] ? arr[1].map(e => e.open) : []}
                         />
+                        </div>
                     );
                 })}
                 {/* this.state.companies.map((el, i) => {
