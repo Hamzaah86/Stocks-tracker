@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 /* TODO */
 // Delay api calls
-// Create delete function
+// Create delete function(done)
 // Style table
-// Send information to mongodb
+// Send information to mongodb (done)
 // Test API call so open/close values are correct always
 // Create graphs
 
@@ -46,20 +46,12 @@ export default class Addstocks extends Component {
         let closed;
         let data;
         let { name, symbol } = e.currentTarget.dataset;
-        let copyCompanies = this.state.copyCompanies;
-        console.log(this.state, 'copy 41');
         e.preventDefault();
 
         api.searchStock(e.currentTarget.dataset.name)
             .then(result => {
-                let allValues = Object.values(result);
-                let lastValue = allValues[allValues.length - 1];
-                let lastValueOfLastValue =
-                    lastValue &&
-                    Object.values(lastValue).length &&
-                    Object.values(lastValue)[Object.values(lastValue).length - 1];
-                open = lastValue && Object.values(lastValueOfLastValue)[0];
-                closed = lastValue && Object.values(lastValueOfLastValue)[3];
+                open = result[result.length - 1].uOpen;
+                closed = result[result.length - 1].close;
 
                 data = {
                     name,
@@ -72,11 +64,33 @@ export default class Addstocks extends Component {
                     clickedCompanies: [...this.state.clickedCompanies, data]
                 });
             })
-
+            .then(() => {
+                let { name } = data;
+                api.addStocks(name).then(result => {
+                    this.setState({
+                        name: '',
+                        message: `Your order '${this.state.companyName}' has been created`
+                    });
+                    setTimeout(() => {
+                        this.setState({
+                            message: null
+                        });
+                    }, 2000);
+                });
+            })
             .catch(err => {
                 console.log(err);
             });
     }
+    /* should take index, not name */
+    deleteHandler = name => {
+        const companies = [...this.state.clickedCompanies];
+        const filteredCompanies = companies.filter(el => el.name !== name);
+        this.setState({ clickedCompanies: filteredCompanies }, () =>
+            console.log(this.state.clickedCompanies)
+        );
+    };
+
     render() {
         return (
             <div className="Addstocks">
@@ -99,6 +113,7 @@ export default class Addstocks extends Component {
                                         name={el.name}
                                         open={el.open}
                                         closed={el.closed}
+                                        delete={this.deleteHandler}
                                     />
                                 );
                             })}

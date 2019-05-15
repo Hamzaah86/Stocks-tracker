@@ -63,7 +63,6 @@ export default {
     // This is an example on how to use this method in a different file
     // api.getCountries().then(countries => { /* ... */ })
     searchStock(body) {
-        console.log('hello from searchname api', body);
         return service
             .post('/search-stock', { body })
             .then(res => res.data)
@@ -71,7 +70,6 @@ export default {
     },
 
     searchName(body) {
-        console.log('hello from searchname api', body);
         return service
             .post('/search-name', { body })
             .then(res => res.data)
@@ -80,7 +78,22 @@ export default {
 
     addStocks(body) {
         return service
-            .post('/add-stock', body)
+            .post('/add-stock', { body })
+            .then(res => res.data)
+            .catch(errHandler);
+    },
+
+    /* checks for users watchlist */
+    getStocks() {
+        return service
+            .get('/add-stock')
+            .then(res => res.data)
+            .catch(errHandler);
+    },
+
+    getMultiplePrices(array) {
+        return service
+            .post('/get-prices', { body: array })
             .then(res => res.data)
             .catch(errHandler);
     },

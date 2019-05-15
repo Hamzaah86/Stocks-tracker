@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import News from './News';
 
 export default class Home extends Component {
     // constructor(props) {
@@ -8,9 +9,13 @@ export default class Home extends Component {
     // }
     render() {
         return (
-            <div className="Home">
-                <h2>Home</h2>
-                <p>This is a Stock tracker App</p>
+            <div class="main">
+                <div className="Home">
+                    <p>
+                        <h3>Stocks Monitoring</h3>
+                    </p>
+                </div>
+                <News />
             </div>
         );
     }

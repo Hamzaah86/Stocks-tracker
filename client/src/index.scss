@@ -118,3 +118,21 @@ body {
     list-style-type: none;
     font-weight: bold;
 }
+
+.navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.signup {
+    display: flex;
+    justify-content: flex-center;
+    align-content: space-between;
+}
+
+body {
+    background-image: url('https://images.pexels.com/photos/257949/pexels-photo-257949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-repeat: no-repeat;
+    background-size: cover;
+    backface-visibility: visible;
+}

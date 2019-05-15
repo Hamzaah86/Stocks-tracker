@@ -3,14 +3,13 @@ import React, { Component } from 'react';
 
 export default class TempStock extends Component {
     constructor(props) {
-        super(props);
-        this.state = {};
+        super(props)
+        this.state = {
+        
+        };
     }
 
-    componentDidMount() {}
-    delete(name){
-      
-    }
+  
     render() {
         return (
             <tr>
@@ -18,7 +17,7 @@ export default class TempStock extends Component {
                 <td>{this.props.open}</td>
                 <td>{this.props.closed}</td>
                 <td>
-                    <button onClick={this.delete.bind(this.props.name)} >Remove</button>
+                    <button onClick={()=>this.props.delete(this.props.name)} >Remove</button>
                 </td>
             </tr>
         );

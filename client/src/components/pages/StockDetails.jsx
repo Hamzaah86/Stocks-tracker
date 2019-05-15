@@ -14,11 +14,9 @@ export default class StockDetails extends Component {
 
     fetchDetails = () => {
         let data = this.props.match.params.id;
-        console.log(data, 'THIS VALUE:D:D');
 
         api.searchStock(data)
             .then(result => {
-                console.log(result, 'this is the result');
                 this.setState({
                     stockInfo: result,
                     companyName: data,
@@ -39,13 +37,12 @@ export default class StockDetails extends Component {
 
     handleClick = e => {
         e.preventDefault();
-        console.log(this.state.companyName);
+
         let data = {
             name: this.state.companyName
         };
         api.addStocks(data)
             .then(result => {
-                console.log('SUCCESS!');
                 this.setState({
                     name: '',
                     message: `Your order '${this.state.companyName}' has been created`

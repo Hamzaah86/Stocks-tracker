@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Route, Link, NavLink, Switch } from 'react-router-dom';
 import Home from './pages/Home';
-//import News from './pages/News';
+import ChartOverview from './pages/ChartOverview';
 import Addstocks from './pages/Addstocks';
 import Secret from './pages/Secret';
 import Login from './pages/Login';
@@ -50,11 +50,15 @@ export default class App extends Component {
                         </button>
                         <div className="collapse navbar-collapse" id="navbarNav">
                             <ul className="navbar-nav">
-                                {/* <li className="nav-item active">
-                                    <a className="nav-link">
-                                        <NavLink to="/stocks">News</NavLink>
-                                    </a>
-                                </li> */}
+                                {
+                                    <li className="nav-item active">
+                                        <a className="nav-link">
+                                            {api.isLoggedIn() && (
+                                                <NavLink to="/chart-overview">Charts</NavLink>
+                                            )}
+                                        </a>
+                                    </li>
+                                }
                                 <li className="nav-item">
                                     <a className="nav-link">
                                         {api.isLoggedIn() && (
@@ -104,7 +108,7 @@ export default class App extends Component {
                 }
                 <Switch>
                     <Route path="/" exact component={Home} />
-                    {/* <Route path="/news" component={News} /> */}
+                    <Route path="/chart-overview" component={ChartOverview} />
                     <Route path="/add-stocks" component={Addstocks} />
                     <Route path="/signup" component={Signup} />
                     <Route path="/login" component={Login} />
