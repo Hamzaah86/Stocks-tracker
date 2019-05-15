@@ -15,18 +15,19 @@ router.get('/news', (req, res, next) => {
     res.json({});
 });
 
-router.get('/add-stocks', (req, res, next) => {
-    res.json({ hello: 'hello' });
-});
-
 //get Api Search
 
 router.post('/search-stock', (req, res, next) => {
-    console.log(req.body.body, 'req.body');
+    console.log(req.body, 'req.body');
+
     let symbol = req.body.body;
+    let range = req.body.range;
+    console.log(symbol, 'SYMBOL!');
     axios
         .get(
-            `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=JU4AP53UTI3GGBYZ/`
+            `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${range || 'ytd'}?token=${
+                process.env.APIKEY2
+            }`
         )
         .then(response => {
             console.log(response, 'response');
@@ -57,14 +58,56 @@ router.post('/search-name', (req, res, next) => {
         });
 });
 
-router.post('/add-stock', (req, res, next) => {
-    const { name } = req.body;
-    console.log(req.body, 'here');
+router.get('/add-stock', (req, res, next) => {
     const { _id } = req.user;
-    console.log(_id, 'id');
-    User.findByIdAndUpdate({ _id }, { $addToSet: { watchList: name } }).then(response => {
+    User.findById({ _id }).then(user => {
+        console.log(user);
+        res.json(user);
+    });
+});
+
+/* Adds user stocks to database */
+router.post('/add-stock', (req, res, next) => {
+    const { body } = req.body;
+    const { _id } = req.user;
+
+    User.findByIdAndUpdate({ _id }, { $addToSet: { watchList: body } }).then(response => {
         console.log(response, 'from mongo');
     });
 });
 
+const getPrice = symbol => {
+    console.log(symbol, 'SYMBOLS, line 80');
+    let range;
+    return axios
+        .get(
+            `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${range || 'ytd'}?token=${
+                process.env.APIKEY2
+            }`
+        )
+        .then(response => {
+            let { data } = response;
+            return data;
+        })
+        .catch(err => {
+            console.error('err');
+        });
+};
+
+router.post('/get-prices', (req, res, next) => {
+    let symbols = req.body.body;
+    console.log(symbols);
+    const promisesArray = symbols.map(symbol => getPrice(symbol));
+    Promise.all(promisesArray).then(results => {
+        /* console.log(results); */
+
+        res.json(results);
+    });
+});
+
 module.exports = router;
+
+/* OLD ONE */
+/* `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${
+    process.env.APIKEY
+}/`; */
