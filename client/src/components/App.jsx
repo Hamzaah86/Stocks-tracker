@@ -7,10 +7,11 @@ import Addstocks from './pages/Addstocks';
 import Secret from './pages/Secret';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import signuplogin from './pages/signuplogin';
 import api from '../api';
 import StockDetails from './pages/StockDetails';
 import userPortfolio from './pages/userPortfolio';
-import News from './pages/News'
+import News from './pages/News';
 
 //import logo from '../logo.svg';
 //<img src={logo} className="App-logo" alt="logo" />
@@ -49,8 +50,8 @@ export default class App extends Component {
                         >
                             <span className="navbar-toggler-icon" />
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarNav">
-                            <ul className="navbar-nav">
+                        <div className="collapse navbar-collapse nav-display" id="navbarNav">
+                            <ul className="navbar-nav mr-5">
                                 {
                                     <li className="nav-item active">
                                         <a className="nav-link">
@@ -67,14 +68,14 @@ export default class App extends Component {
                                         )}
                                     </a>
                                 </li>
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <a className="nav-link">
-                                        {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
+                                        <NavLink to="/signup">Signup</NavLink>
                                     </a>
-                                </li>
+                                </li> */}
                                 <li className="nav-item">
                                     <a className="nav-link">
-                                        {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}{' '}
+                                        {!api.isLoggedIn() && <NavLink to="/login">Register</NavLink>}{' '}
                                     </a>
                                 </li>
                                 <li className="nav-item">
@@ -112,8 +113,8 @@ export default class App extends Component {
                     <Route path="/chart-overview" component={ChartOverview} />
                     <Route path="/add-stocks" component={Addstocks} />
                     <Route path="/signup" component={Signup} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/secret" component={Secret} />
+                    {/* <Route path="/login" component={Login} /> */}
+                    <Route path="/login" component={signuplogin} />
                     <Route path="/stockdetail/:id" component={StockDetails} />
                     <Route path="/userPortfolio" component={userPortfolio} />
 

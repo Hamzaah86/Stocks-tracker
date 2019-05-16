@@ -15,7 +15,6 @@ export default class Home extends Component {
                         <h3>Stocks Monitoring</h3>
                     </p>
                 </div>
-                
             </div>
         );
     }

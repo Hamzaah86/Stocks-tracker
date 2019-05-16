@@ -12,7 +12,7 @@ export default class News extends Component {
     render() {
         return (
             
-            <div class="ticker-wrap">
+             <div class="ticker-wrap">
             <div class="ticker">
                 {this.state.news && this.state.news.map((article, idx) => (
                     <div className="ticker__item">{article.title}</div>

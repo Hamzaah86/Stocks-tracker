@@ -18,11 +18,8 @@ router.get('/news', (req, res, next) => {
 //get Api Search
 
 router.post('/search-stock', (req, res, next) => {
-    console.log(req.body, 'req.body');
-
     let symbol = req.body.body;
     let range = req.body.range;
-    console.log(symbol, 'SYMBOL!');
     axios
         .get(
             `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${range || 'ytd'}?token=${
@@ -30,7 +27,6 @@ router.post('/search-stock', (req, res, next) => {
             }`
         )
         .then(response => {
-            console.log(response, 'response');
             const { data } = response;
             res.json(data);
         })
@@ -41,7 +37,6 @@ router.post('/search-stock', (req, res, next) => {
 
 router.post('/search-name', (req, res, next) => {
     const { body } = req.body;
-    console.log(body, 'REQ');
     axios
         .get(
             `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&apikey=${
@@ -50,7 +45,6 @@ router.post('/search-name', (req, res, next) => {
         )
         .then(response => {
             const { data } = response;
-            console.log(data);
             res.json(data);
         })
         .catch(err => {
@@ -77,7 +71,6 @@ router.post('/add-stock', (req, res, next) => {
 });
 
 const getPrice = symbol => {
-    console.log(symbol, 'SYMBOLS, line 80');
     let range;
     return axios
         .get(
@@ -96,11 +89,9 @@ const getPrice = symbol => {
 
 router.post('/get-prices', (req, res, next) => {
     let symbols = req.body.body;
-    console.log(symbols);
+
     const promisesArray = symbols.map(symbol => getPrice(symbol));
     Promise.all(promisesArray).then(results => {
-        /* console.log(results); */
-
         res.json(results);
     });
 });

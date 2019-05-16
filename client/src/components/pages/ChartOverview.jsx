@@ -40,8 +40,7 @@ export default class ChartOverview extends Component {
             });
     }
     render() {
-        /* Names and values are stored in state.companies
-        How to pass them to component Chart?.. */
+       
         /* Ternary. Thor do this */
         console.log(this.state.companies);
         let companyNames = Object.keys(this.state.companies);
